@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFIQ21 - Premium Store</title>
+    <style>
+        /* --- RESET & FONTS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0c;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 150, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        /* --- CONTAINER UTAMA --- */
+        .container {
+            width: 100%;
+            max-width: 480px; /* Lebar ideal untuk tampilan HP */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- HEADER / PROFIL --- */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #333, #000, #4a4a4a);
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #1a1a1a;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #88c0ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 150, 255, 0.2);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- SECTION TITLE --- */
+        .section-title {
+            width: 100%;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 25px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #222;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #0096ff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #0096ff;
+        }
+
+        /* --- CARD PRODUK --- */
+        .product-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card {
+            background: rgba(25, 25, 30, 0.8);
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #0096ff;
+            box-shadow: 0 5px 15px rgba(0, 150, 255, 0.15);
+            background: rgba(30, 30, 40, 0.9);
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0096ff;
+            text-shadow: 0 0 5px rgba(0, 150, 255, 0.5);
+        }
+
+        .card-price span {
+            font-size: 11px;
+            color: #666;
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+
+        /* --- TOMBOL BELI --- */
+        .btn-buy {
+            background: linear-gradient(135deg, #0096ff, #0055aa);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
+            white-space: nowrap;
+        }
+
+        .btn-buy:hover {
+            background: linear-gradient(135deg, #00aaff, #0066cc);
+            box-shadow: 0 6px 15px rgba(0, 150, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .btn-buy:active {
+            transform: scale(0.95);
+        }
+
+        /* --- FITUR FREE UPDATE (Highlight) --- */
+        .feature-card {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.1), rgba(0, 0, 0, 0.5));
+            border: 1px dashed #0096ff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '★';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 60px;
+            color: rgba(0, 150, 255, 0.1);
+            transform: rotate(15deg);
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: #a0a0a0;
+            line-height: 1.5;
+        }
+
+        .feature-desc strong {
+            color: #0096ff;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #555;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #0096ff;
+            text-decoration: none;
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-grid {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 360px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .btn-buy {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-wrapper">
+                <!-- Ganti 'logo.jpg' dengan nama file gambar yang kamu simpan -->
+                <img src="logo.jpg" alt="AFIQ21 Logo">
+            </div>
+            <h1 class="title">AFIQ21</h1>
+            <p class="subtitle">Premium Store</p>
+        </div>
+
+        <!-- SECTION 1: APLIKASI MAKRO FF -->
+        <div class="section-title">Aplikasi Makro FF</div>
+        <div class="product-grid">
+            <!-- Produk V1 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">Aplikasi Makro V1</span>
+                    <span class="card-price">Rp 13.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20Aplikasi%20Makro%20V1%20(13K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk V2 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">Aplikasi Makro V2</span>
+                    <span class="card-price">Rp 15.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20Aplikasi%20Makro%20V2%20(15K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk V3 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">Aplikasi Makro V3</span>
+                    <span class="card-price">Rp 20.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20Aplikasi%20Makro%20V3%20(20K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+        </div>
+
+        <!-- FITUR FREE UPDATE -->
+        <div class="feature-card">
+            <div class="feature-title">🚀 Free Update Selamanya</div>
+            <div class="feature-desc">
+                Hanya dengan <strong>Rp 100.000</strong>, kamu mendapatkan <strong>GRATIS UPDATE SELAMANYA</strong> dan diundang ke Grup Khusus Update.
+            </div>
+        </div>
+
+        <!-- SECTION 2: APLIKASI MOBILADOR -->
+        <div class="section-title">Aplikasi Mobilador</div>
+        <div class="product-grid">
+            <!-- Produk MSI X GGMP2 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">MSI X AFIQ21 GGMP2</span>
+                    <span class="card-price">Rp 15.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20MSI%20X%20AFIQ21%20GGMP2%20(15K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk MSI X GGMP3 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">MSI X AFIQ21 GGMP3</span>
+                    <span class="card-price">Rp 15.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20MSI%20X%20AFIQ21%20GGMP3%20(15K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk ROG X GGMP2 -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">ROG X AFIQ21 GGMP2</span>
+                    <span class="card-price">Rp 15.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20ROG%20X%20AFIQ21%20GGMP2%20(15K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk Panda Mouse Pro -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">Panda Mouse Pro</span>
+                    <span class="card-price">Rp 10.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20Panda%20Mouse%20Pro%20(10K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk GGMP3 Basic -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">GGMP3 Basic</span>
+                    <span class="card-price">Rp 10.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20GGMP3%20Basic%20(10K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+
+            <!-- Produk GGMP2 Basic -->
+            <div class="card">
+                <div class="card-info">
+                    <span class="card-name">GGMP2 Basic</span>
+                    <span class="card-price">Rp 10.000</span>
+                </div>
+                <a href="https://wa.me/6288983803976?text=Halo%20AFIQ21,%20saya%20mau%20beli%20GGMP2%20Basic%20(10K)" target="_blank" class="btn-buy">
+                    🛒 Beli
+                </a>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            &copy; 2026 <a href="#">AFIQ21 Store</a>. All Rights Reserved.<br>
+            All Product Premium Permanen.
+        </div>
+
+    </div>
+
+</body>
+</html>
